@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { int, json, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -25,4 +25,22 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// TODO: Add your tables here
+/**
+ * Unlisted public snapshots intentionally exclude the original PDF/video text.
+ * A long random slug is the access key; each record contains only the derived
+ * learning material or a completed exam summary explicitly selected by the user.
+ */
+export const sharedLearningItems = mysqlTable("sharedLearningItems", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 32 }).notNull().unique(),
+  shareType: mysqlEnum("shareType", ["material", "examResult"]).notNull(),
+  title: varchar("title", { length: 500 }).notNull(),
+  level: mysqlEnum("level", ["Başlangıç", "Orta", "İleri"]).notNull(),
+  sourceKind: mysqlEnum("sourceKind", ["youtube", "pdf"]).notNull(),
+  sourceTitle: varchar("sourceTitle", { length: 500 }).notNull(),
+  payload: json("payload").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type SharedLearningItem = typeof sharedLearningItems.$inferSelect;
+export type InsertSharedLearningItem = typeof sharedLearningItems.$inferInsert;

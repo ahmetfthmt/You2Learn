@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertSharedLearningItem, InsertUser, sharedLearningItems, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,19 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+export async function createSharedLearningItem(item: InsertSharedLearningItem) {
+  const db = await getDb();
+  if (!db) throw new Error("Paylaşım bağlantısı şu anda oluşturulamadı.");
+
+  await db.insert(sharedLearningItems).values(item);
+  const result = await db.select().from(sharedLearningItems).where(eq(sharedLearningItems.slug, item.slug)).limit(1);
+  return result[0];
+}
+
+export async function getSharedLearningItemBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Paylaşım bağlantısı şu anda açılamadı.");
+
+  const result = await db.select().from(sharedLearningItems).where(eq(sharedLearningItems.slug, slug)).limit(1);
+  return result[0] ?? null;
+}

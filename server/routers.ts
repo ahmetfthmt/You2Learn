@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { generateWithProvider, verifyProviderConnection } from "./generation";
+import { createPublicShare, createShareInputSchema, getPublicShare, publicShareSlugSchema } from "./share";
 import { getYouTubeSource } from "./source";
 
 export const appRouter = router({
@@ -46,6 +47,15 @@ export const appRouter = router({
         }),
       }))
       .mutation(async ({ input }) => ({ content: await generateWithProvider(input) })),
+  }),
+
+  share: router({
+    create: publicProcedure
+      .input(createShareInputSchema)
+      .mutation(({ input }) => createPublicShare(input)),
+    getPublic: publicProcedure
+      .input(publicShareSlugSchema)
+      .query(({ input }) => getPublicShare(input.slug)),
   }),
 
 });

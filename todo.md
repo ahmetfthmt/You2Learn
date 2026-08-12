@@ -22,3 +22,13 @@
 - [x] Geçmiş listesinden kayıt açma etkileşiminde üretim isteğinin çağrılmadığını istemci entegrasyon testiyle doğrula
 - [x] Üretim isteği girişindeki model, API anahtarı ve kaynak metni Zod sınırlarını otomatik testle doğrula
 - [x] Ana ekran geçmiş listesinde kayıt açma eyleminin generation isteği başlatmadığını istemci entegrasyon testiyle doğrula
+- [x] Paylaşılabilir öğrenme materyali ve sınav sonucu için süreli olmayan benzersiz genel bağlantı veri modelini oluştur
+- [x] Kullanıcı paylaşım tercihini onaylayan, kaynak ham içeriğini varsayılan olarak dışarıda bırakan güvenli paylaşım akışını uygula
+- [x] Öğrenme materyali ekranına bağlantı kopyalama, sistem paylaşımı, X ve LinkedIn paylaşım düğmelerini ekle
+- [x] Tamamlanan Ustalık Sınavı sonucunu puan ve başarı özetiyle paylaşılabilir hâle getir
+- [x] Herkese açık paylaşım bağlantısında öğrenme materyali veya sonuç özetini gösteren mobil uyumlu sayfayı ekle
+- [x] Paylaşım oluşturma, genel bağlantı erişimi ve paylaşım metni oluşturma testlerini ekle
+- [x] `/paylas/:slug` bağlantısının materyal ve sınav sonucu için gerçek hedefe açıldığını istemci entegrasyon testiyle doğrula
+- [x] Genel paylaşım sayfasında ham kaynak metninin dışarıda kaldığını ve yalnızca seçilen paylaşım özetinin gösterildiğini testle güvenceye al
+- [x] Materyal ve sınav sonucu varyantları için ShareDialog paylaşım metni ile sosyal bağlantı parametrelerini istemci testiyle doğrula
+- [x] Uygulama düzeyinde `/paylas/:slug` rotasının genel paylaşım sayfasını render ettiğini istemci entegrasyon testiyle doğrula

@@ -1,0 +1,47 @@
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
+import { trpc } from "@/lib/trpc";
+import type { LearningPayload } from "@shared/learning";
+import { BookOpenCheck, CheckCircle2, ChevronLeft, CircleAlert, Clock3, FileText, GraduationCap, ShieldCheck, Sparkles, Trophy, Youtube } from "lucide-react";
+import { Link, useRoute } from "wouter";
+
+type SharedExamResult = {
+  score: number;
+  totalQuestions: number;
+  percentage: number;
+  completedAt: number;
+  examTitle: "Ustalık Sınavı (Mastery Exam)";
+};
+
+function PageShell({ children }: { children: React.ReactNode }) {
+  return <div className="min-h-screen bg-[#f7f8fc] text-slate-950"><header className="border-b border-slate-200 bg-white/85 backdrop-blur"><div className="container flex h-[73px] items-center justify-between"><Link href="/" className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-xl bg-slate-950 text-white shadow-lg shadow-slate-900/15"><BookOpenCheck className="size-5" /></span><span><strong className="block text-sm tracking-tight">All2App</strong><span className="block text-xs text-slate-500">AI Learning Lab</span></span></Link><span className="hidden items-center gap-2 text-xs font-medium text-slate-500 sm:flex"><ShieldCheck className="size-4 text-indigo-600" /> Güvenli paylaşım görünümü</span></div></header>{children}</div>;
+}
+
+function PageLoading() {
+  return <PageShell><main className="container py-10 sm:py-16"><Skeleton className="h-6 w-48 rounded-full" /><Skeleton className="mt-6 h-12 max-w-2xl" /><Skeleton className="mt-3 h-5 max-w-xl" /><div className="mt-8 grid gap-5"><Skeleton className="h-44 rounded-3xl" /><Skeleton className="h-72 rounded-3xl" /></div></main></PageShell>;
+}
+
+function NotAvailable() {
+  return <PageShell><main className="container grid min-h-[calc(100vh-73px)] place-items-center py-12"><section className="max-w-md rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-[0_20px_60px_-35px_rgba(15,23,42,0.35)]"><span className="mx-auto grid size-12 place-items-center rounded-2xl bg-rose-50 text-rose-600"><CircleAlert className="size-6" /></span><h1 className="mt-5 text-2xl font-semibold tracking-tight">Paylaşım bulunamadı</h1><p className="mt-3 text-sm leading-6 text-slate-600">Bu bağlantı geçersiz olabilir veya paylaşım artık erişilebilir değildir.</p><Button asChild className="mt-6 rounded-xl bg-slate-950 hover:bg-slate-800"><a href="/"><ChevronLeft className="mr-1 size-4" /> Ana sayfaya dön</a></Button></section></main></PageShell>;
+}
+
+function MaterialShare({ item }: { item: { title: string; level: string; sourceKind: string; sourceTitle: string; createdAt: Date; payload: unknown } }) {
+  const payload = item.payload as LearningPayload;
+  const sourceIcon = item.sourceKind === "youtube" ? <Youtube className="size-4" /> : <FileText className="size-4" />;
+  return <PageShell><main className="container py-8 sm:py-14"><div className="max-w-4xl"><div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-700"><Sparkles className="size-3.5" /> Paylaşılan öğrenme materyali</div><h1 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-5xl">{item.title}</h1><p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">{payload.lesson.subtitle || payload.sourceSummary}</p></div><div className="mt-8 grid gap-4 sm:grid-cols-3"><div className="rounded-2xl border border-slate-200 bg-white p-4"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Düzey</span><p className="mt-2 font-semibold text-slate-900">{item.level}</p></div><div className="rounded-2xl border border-slate-200 bg-white p-4"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Tahmini süre</span><p className="mt-2 flex items-center gap-2 font-semibold text-slate-900"><Clock3 className="size-4 text-indigo-600" />{payload.estimatedMinutes} dakika</p></div><div className="rounded-2xl border border-slate-200 bg-white p-4"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Kaynak türü</span><p className="mt-2 flex items-center gap-2 font-semibold text-slate-900">{sourceIcon}{item.sourceKind === "youtube" ? "YouTube videosu" : "PDF belgesi"}</p></div></div><section className="mt-6 rounded-3xl border border-amber-200 bg-amber-50 p-5 text-sm leading-6 text-amber-950"><strong>Kaynak sadakat notu:</strong> {payload.sourceBoundaries}</section><section className="mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_20px_60px_-35px_rgba(15,23,42,0.28)] sm:p-8"><div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-xl bg-indigo-50 text-indigo-700"><GraduationCap className="size-5" /></span><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-600">Öğrenme hedefleri</p><h2 className="mt-1 text-xl font-semibold">Bu materyalde neler öğreneceksiniz?</h2></div></div><ul className="mt-6 grid gap-3 sm:grid-cols-2">{payload.lesson.learningObjectives.map((objective, index) => <li key={`${objective}-${index}`} className="flex gap-3 rounded-xl bg-slate-50 p-3 text-sm leading-6 text-slate-700"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-600" />{objective}</li>)}</ul></section><section className="mt-6 space-y-4">{payload.lesson.modules.map((module, index) => <article key={`${module.title}-${index}`} className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-7"><div className="flex items-start gap-4"><span className="grid size-8 shrink-0 place-items-center rounded-full bg-slate-950 font-mono text-sm font-bold text-white">{index + 1}</span><div><h2 className="text-xl font-semibold tracking-tight">{module.title}</h2><p className="mt-1 text-sm font-medium text-indigo-700">{module.objective}</p></div></div><p className="mt-5 text-sm leading-7 text-slate-700">{module.explanation}</p><ul className="mt-5 grid gap-2 border-l-2 border-indigo-200 pl-4">{module.keyPoints.map((point, pointIndex) => <li key={`${point}-${pointIndex}`} className="text-sm leading-6 text-slate-600">{point}</li>)}</ul></article>)}</section><footer className="mt-10 rounded-3xl bg-slate-950 p-6 text-slate-200 sm:p-8"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-300">Paylaşım bilgisi</p><p className="mt-3 text-sm leading-6">Bu görünüm, kullanıcı tarafından seçilen öğrenme materyalini içerir. Orijinal <strong>{item.sourceTitle}</strong> kaynağının ham PDF metni veya video transkripti paylaşılmamıştır.</p></footer></main></PageShell>;
+}
+
+function ExamResultShare({ item }: { item: { title: string; level: string; sourceKind: string; sourceTitle: string; createdAt: Date; payload: unknown } }) {
+  const result = item.payload as SharedExamResult;
+  return <PageShell><main className="container grid min-h-[calc(100vh-73px)] place-items-center py-10 sm:py-16"><section className="w-full max-w-2xl overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_28px_80px_-44px_rgba(15,23,42,0.4)]"><div className="bg-slate-950 px-6 py-9 text-white sm:px-10"><span className="grid size-12 place-items-center rounded-2xl bg-white/10 text-amber-300"><Trophy className="size-6" /></span><p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-indigo-300">Paylaşılan başarı özeti</p><h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Ustalık Sınavı tamamlandı</h1><p className="mt-3 text-sm leading-6 text-slate-300">{item.title} · {item.level} düzeyi</p></div><div className="p-6 sm:p-10"><div className="grid gap-6 sm:grid-cols-[1fr_1.4fr]"><div className="grid aspect-square place-items-center rounded-3xl bg-indigo-50 text-center"><div><span className="font-mono text-4xl font-bold text-indigo-700">%{Math.round(result.percentage)}</span><p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-indigo-600">Başarı oranı</p></div></div><div className="flex flex-col justify-center"><h2 className="text-xl font-semibold">{result.score}/{result.totalQuestions} doğru yanıt</h2><p className="mt-2 text-sm leading-6 text-slate-600">Bu sonuç, kullanıcının tamamladığı Ustalık Sınavı (Mastery Exam) puan özetidir. Sınav yanıtları paylaşılmamıştır.</p><Progress value={result.percentage} className="mt-5 h-2" /></div></div><div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-4"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Öğrenme kaynağı</p><p className="mt-2 flex items-center gap-2 text-sm font-medium text-slate-800">{item.sourceKind === "youtube" ? <Youtube className="size-4 text-red-600" /> : <FileText className="size-4 text-rose-600" />}{item.sourceTitle}</p></div></div></section></main></PageShell>;
+}
+
+export default function SharedLearning() {
+  const [, params] = useRoute("/paylas/:slug");
+  const slug = params?.slug ?? "";
+  const shareQuery = trpc.share.getPublic.useQuery({ slug }, { enabled: Boolean(slug), retry: false });
+  if (shareQuery.isLoading) return <PageLoading />;
+  if (shareQuery.isError || !shareQuery.data) return <NotAvailable />;
+  return shareQuery.data.shareType === "material" ? <MaterialShare item={shareQuery.data} /> : <ExamResultShare item={shareQuery.data} />;
+}

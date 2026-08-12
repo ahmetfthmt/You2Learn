@@ -145,7 +145,7 @@ export default function Home() {
             </section>
           </aside>
 
-          <div className="min-w-0">{active ? <LearningView key={active.id} payload={active.payload} /> : <LearningPreview />}</div>
+          <div className="min-w-0">{active ? <LearningView key={active.id} payload={active.payload} source={active.source} /> : <LearningPreview />}</div>
         </div>
       </main>
 
