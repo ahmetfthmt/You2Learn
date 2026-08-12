@@ -1,0 +1,24 @@
+# Project TODO
+
+- [x] Kaynak türü sekmeleriyle YouTube URL ve sürükle-bırak PDF giriş akışını oluştur
+- [x] Başlangıç, Orta ve İleri düzey seçeneklerini üretim isteklerine bağla
+- [x] PDF metin çıkarımı, YouTube içerik bağlamı ve kaynak doğrulama katmanını uygula
+- [x] Kaynak dışına çıkmayı engelleyen zorunlu Gemini talimatları ve yapılandırılmış yanıt şemasını oluştur
+- [x] Türkçe öğrenme uygulaması üretimi ile en az 30 soruluk Ustalık Sınavı (Mastery Exam) üretimini uygula
+- [x] Öğrenme içeriği, etkileşimli sınav yanıtları ve anlık açıklayıcı geri bildirim deneyimini geliştir
+- [x] Üretilen uygulamaları kaynak metadatasıyla tarayıcı tabanlı yerel veritabanında sakla ve geçmişten yeniden üretimsiz yükle
+- [x] Tekil geçmiş öğesi silme ve tüm geçmişi temizleme işlemleri için çalışan onay diyalogları ekle
+- [x] Inter ve JetBrains Mono tipografisi, Tailwind arayüz sistemi, yükleme iskeletleri ve mobil uyumluluğu uygula
+- [x] API anahtarlarını tarayıcıda tutup boyut sınırları, hata senaryoları ve kalıcılaştırmayan sunucu aktarımını uygula
+- [x] Vitest birim testlerini, tip denetimini, üretim derlemesini ve görsel kontrolleri çalıştır
+- [x] Render.com dağıtım yapılandırmasını, GitHub aktarım belgelerini ve örnek ortam değişkenlerini ekle
+- [x] Gemini, OpenAI, OpenRouter ve Claude için seçilebilir sağlayıcı uyarlayıcılarını ekle
+- [x] Kullanıcı API anahtarlarını yalnızca tarayıcı yerel depolamasında açıkça belirtilen gizlilik uyarısıyla sakla; anahtarı sunucuda veya veritabanında kalıcılaştırma
+- [x] Sağlayıcı seçimi, model alanı, anahtar ekleme-silme ve bağlantı doğrulama arayüzünü oluştur
+- [x] Tarayıcı anahtarını saklamadan yalnızca üretim isteği boyunca kullanan ve CORS engellerini aşan sunucu tarafı sağlayıcı aktarım katmanını uygula
+- [x] Geçmişten kayıt açmanın yeniden üretim isteği başlatmadığını otomatik testle güvenceye al
+- [x] Sağlayıcı ayarlarına bağlantıyı doğrula eylemi ve açık başarı-hata durumu ekle
+- [x] YouTube ve üretim girdileri için kaynak boyutu/doğrulama sınırlarını testlerle kapsa
+- [x] Geçmiş listesinden kayıt açma etkileşiminde üretim isteğinin çağrılmadığını istemci entegrasyon testiyle doğrula
+- [x] Üretim isteği girişindeki model, API anahtarı ve kaynak metni Zod sınırlarını otomatik testle doğrula
+- [x] Ana ekran geçmiş listesinde kayıt açma eyleminin generation isteği başlatmadığını istemci entegrasyon testiyle doğrula

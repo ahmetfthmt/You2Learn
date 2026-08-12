@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: all2app-ai-learning-lab
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    startCommand: pnpm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22.13.0
+      - key: PUBLIC_APP_URL
+        sync: false

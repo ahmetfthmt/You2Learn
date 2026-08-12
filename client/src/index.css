@@ -1,4 +1,16 @@
 @import "tailwindcss";
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { font-family: "Inter", ui-sans-serif, system-ui, sans-serif; }
+  body { @apply bg-background text-foreground antialiased; }
+  button, input, textarea, select { font: inherit; }
+}
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
