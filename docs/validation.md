@@ -6,12 +6,14 @@
 
 Paylaşım bağlantısının geçersiz olduğu durumda `/paylas/:slug` hedef sayfası 390 px mobil genişlikte doğrulandı; kullanıcıya açıklayıcı bir durum metni ve ana sayfaya dönüş eylemi sunuluyor.
 
+Sertifika bağlantısının geçersiz olduğu durumda `/sertifika/:slug` hedef sayfası 390 px mobil genişlikte doğrulandı; kullanıcıya açıklayıcı bir durum metni ve ana sayfaya dönüş eylemi sunuluyor.
+
 ## Otomatik kontroller
 
 | Komut | Sonuç |
 |---|---|
 | `pnpm check` | Başarılı |
-| `pnpm test` | 12 test dosyası, 22 test başarılı |
+| `pnpm test` | 15 test dosyası, 26 test başarılı |
 | `pnpm build` | Başarılı |
 
-Testler; oturum kapatma işlemini, YouTube URL doğrulamasını, kaynak sadakati istemini, sağlayıcı çıktı şeması denetimini, üretim isteği sınırlarını, ana ekran geçmişinden yeniden üretimsiz yüklemeyi, paylaşım metnini, sosyal bağlantıları, genel paylaşım sayfasını ve uygulama düzeyindeki paylaşım yönlendirmesini kapsar.
+Testler; oturum kapatma işlemini, YouTube URL doğrulamasını, kaynak sadakati istemini, sağlayıcı çıktı şeması denetimini, üretim isteği sınırlarını, ana ekran geçmişinden yeniden üretimsiz yüklemeyi, paylaşım metnini, sosyal bağlantıları, genel paylaşım sayfasını, uygulama yönlendirmesini, rozet düzeyi hesaplamasını, sertifika görünümünü ve sertifika paylaşım akışını kapsar.

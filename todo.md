@@ -32,3 +32,8 @@
 - [x] Genel paylaşım sayfasında ham kaynak metninin dışarıda kaldığını ve yalnızca seçilen paylaşım özetinin gösterildiğini testle güvenceye al
 - [x] Materyal ve sınav sonucu varyantları için ShareDialog paylaşım metni ile sosyal bağlantı parametrelerini istemci testiyle doğrula
 - [x] Uygulama düzeyinde `/paylas/:slug` rotasının genel paylaşım sayfasını render ettiğini istemci entegrasyon testiyle doğrula
+- [x] Başarı oranına göre rozet düzeylerini ve kutlama mesajlarını belirleyen merkezi kural katmanını oluştur
+- [x] Sınav tamamlanma ekranında puan, rozet ve sertifika görüntüleme eylemini sunan kutlama alanını ekle
+- [x] Ders adı, düzey, puan, başarı oranı ve tamamlanma tarihi içeren özel sertifika sayfasını oluştur
+- [x] Sertifika sayfası için paylaşılabilir bağlantı, bağlantı kopyalama ve sistem paylaşımı akışını ekle
+- [x] Rozet hesaplama, sertifika görünümü ve paylaşım akışı için otomatik testleri ekle
